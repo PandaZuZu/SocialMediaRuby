@@ -1,0 +1,9 @@
+<div class= "container">
+    <div class= "register_form">
+        <%= form_for @new_user, url: users_register_path do |f| %>
+        <%= f.label :first_name, value: 'First Name' %>
+        <%= f.text_field :first_name %>
+        <%= f.submit :Register %>
+        <% end %>
+    </div>
+</div>

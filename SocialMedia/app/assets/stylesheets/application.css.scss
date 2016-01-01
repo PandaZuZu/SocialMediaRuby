@@ -16,3 +16,23 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    position: relative;
+    background-color:bisque;
+    width: 100%;
+    height: 10em;
+}
+
+.register_form{
+    position: absolute;
+    background-color: aqua;
+    width: 90%;
+    height: 100%;
+    left: 5%;
+    }
