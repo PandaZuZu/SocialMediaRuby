@@ -1,9 +1,156 @@
 <div class= "container">
     <div class= "register_form">
         <%= form_for @new_user, url: users_register_path do |f| %>
-        <%= f.label :first_name, value: 'First Name' %>
-        <%= f.text_field :first_name %>
-        <%= f.submit :Register %>
+        <div class= "form_left_wrapper">
+        <table>
+                <!--------------- first name --------------->
+                <tr>
+                    <td>
+                        <%= f.label :first_name, value: 'First Name' %>
+                    </td>
+                    <td>
+                        <%= f.text_field :first_name %>    
+                    </td>
+                </tr>
+                <!--------------- last name --------------->
+                <tr>
+                    <td>
+                        <%= f.label :last_name, value: 'Last Name' %>
+                    </td>
+                    <td>
+                        <%= f.text_field :last_name %>    
+                    </td>
+                </tr>
+                <!--------------- username --------------->
+                <tr>
+                    <td>
+                        <%= f.label :Username, value: 'Username' %>
+                    </td>
+                    <td>
+                        <%= f.text_field :username, value: @username_field %>  
+                    </td>
+                </tr>
+                <!--------------- password --------------->
+                <tr>
+                    <td>
+                        <%= f.label :password, value: 'Password' %>
+                    </td>
+                    <td>
+                        <%= f.text_field :password, value: @password_field, type: 'password' %>  
+                    </td>
+                </tr>
+                <!--------------- sex --------------->
+                <tr>
+                    <td>
+                        <%= f.label :sex, value: 'Sex' %>
+                    </td>
+                    <td>
+                        <%= f.label :sex, value: 'M' %>
+                        <%= f.radio_button :sex, value: 'M' %>
+                        <%= f.label :sex, value: 'F' %>
+                        <%= f.radio_button :sex, value: 'F' %>
+                    </td>
+                </tr>
+                <!--------------- birthdate --------------->
+                <tr>
+                    <td>
+                        <%= f.label :birth_date, value: 'Birthdate' %>
+                    </td>
+                    <td style="width: 100%">
+                        <%= f.date_select :birth_date %>
+                    </td>
+                </tr>
+                <!--------------- interests --------------->
+                <tr>
+                    <td>
+                        <%= f.label :interest, value: 'Interested In' %>
+                    </td>
+                    <td>
+                        <%= f.label :interest, value: 'Women' %>
+                        <%= f.check_box :interests %> 
+                        <%= f.label :interest, value: 'Men' %>
+                        <%= f.check_box :interests %>    
+                    </td>
+                </tr>
+            </table>        
+        </div>
+        
+        <div class= "form_right_wrapper">
+            <table>
+                <!--------------- description --------------->
+                <tr>
+                    <td>
+                        <%= f.label :description, value: 'Description' %>
+                    </td>
+                    <td style="padding-top: 10px">
+                        <%= f.text_area :description, size: '30x5', maxlength: '5000' %>    
+                    </td>
+                </tr>
+                <!--------------- gravatar --------------->
+                <tr>
+                    <td>
+                        <%= f.label :gravatar, value: 'Gravatar' %>
+                    </td>
+                    <td>
+                        <table>
+                        <tr>
+                            <td>
+                                <!---------- 1 ---------->
+                                <%= f.radio_button :gravatar, value: '1' %>  
+                                <%= image_tag('http://hospitalfranciscovilar.com.br/wp-content/uploads/2013/11/gravatar-60-grey.jpg', size: '50x50') %>
+                            </td>
+                            <td>
+                                <!---------- 2 ---------->
+                                <%= f.radio_button :gravatar, value: '2' %>  
+                                <%= image_tag('http://hospitalfranciscovilar.com.br/wp-content/uploads/2013/11/gravatar-60-grey.jpg', size: '50x50') %>
+                            </td>
+                            <td>
+                                <!---------- 3 ---------->
+                                <%= f.radio_button :gravatar, value: '3' %>  
+                                <%= image_tag('http://hospitalfranciscovilar.com.br/wp-content/uploads/2013/11/gravatar-60-grey.jpg', size: '50x50') %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <!---------- 4 ---------->
+                                <%= f.radio_button :gravatar, value: '4' %>  
+                                <%= image_tag('http://hospitalfranciscovilar.com.br/wp-content/uploads/2013/11/gravatar-60-grey.jpg', size: '50x50') %>
+                            </td>
+                            <td>
+                                <!---------- 5 ---------->
+                                <%= f.radio_button :gravatar, value: '5' %>  
+                                <%= image_tag('http://hospitalfranciscovilar.com.br/wp-content/uploads/2013/11/gravatar-60-grey.jpg', size: '50x50') %>
+                            </td>
+                           <td>
+                                <!---------- 6 ---------->
+                                <%= f.radio_button :gravatar, value: '6' %>  
+                                <%= image_tag('http://hospitalfranciscovilar.com.br/wp-content/uploads/2013/11/gravatar-60-grey.jpg', size: '50x50') %>
+                            </td>
+                        </tr>
+                    </table>
+                    </td>
+                    
+                    
+                    
+                </tr>
+            </table>        
+        </div>
+                            
+        <div class= "bottom_buttons">
+            <% if @new_user.errors.any? %>
+                <ul>    
+                    <% @new_user.errors.full_messages.each do |msg| %>
+                    <li style="color: red">
+                        <%= msg %>                        
+                    </li>
+                    <% end %>
+                </ul> 
+
+            <% end %>
+            <%= f.submit :Register %>
+        </div>         
+            
         <% end %>
+
     </div>
 </div>

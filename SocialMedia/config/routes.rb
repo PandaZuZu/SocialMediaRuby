@@ -2,8 +2,6 @@ Rails.application.routes.draw do
     get 'shared/navigationbar'
     get 'home/index'
     
-    #resources :users, :path => "profile"
-    
     get 'users/index', :path => 'profile', as: 'users'
     get 'users/register', to: 'users#register'
     post 'users/register', to: 'users#create'
