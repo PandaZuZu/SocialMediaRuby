@@ -1,21 +1,103 @@
-<class id="featured_users_wrapper">
+<header class="logo">
+    <%= image_tag('social-media.jpg') %>
+</header>
 
+<div class="featured_users_wrapper">
     <% if @featured_users.any? %>
         <% @featured_users.each do |user| %>
-            <%= user.first_name %>
-            <br/>
+            <div class= "card">
+                <%= image_tag('social-media.jpg', size:'75x75', class:'card_image') %>
+                <label>First name: </label>
+                <%= user.first_name %>
+                <br/>
+                <label>Last name: </label>
+                <%= user.last_name %>
+                <br/>
+                <label>Username: </label>
+                <%= user.username %>
+                <br/>
+            </div>
+        <% end %>
+        <!---------- only 1 user registered ---------->
+        <% if @featured_users.count == 1 %>
+            <div class= "card">
+                <%= image_tag('social-media.jpg', size:'75x75', class:'card_image') %>
+                <label>First name: </label>
+                
+                <br/>
+                <label>Last name: </label>
+                <br/>
+                <label>Username: </label>
+                <br/>
+            </div>
+            <div class= "card">
+                <%= image_tag('social-media.jpg', size:'75x75', class:'card_image') %>
+                <label>First name: </label>
+                
+                <br/>
+                <label>Last name: </label>
+                <br/>
+                <label>Username: </label>
+                <br/>
+            </div>
+        <% end %>
+        <!---------- only 2 users registerered --------->
+        <% if @featured_users.count == 2 %>
+            <div class= "card">
+                <%= image_tag('social-media.jpg', size:'75x75', class:'card_image') %>
+                <label>First name: </label>
+                
+                <br/>
+                <label>Last name: </label>
+                <br/>
+                <label>Username: </label>
+                <br/>
+            </div>
         <% end %>
     <% else %>
-        nothing
+            <div class= "card">
+                <%= image_tag('social-media.jpg', size:'75x75', class:'card_image') %>
+                <label>First name: </label>
+                
+                <br/>
+                <label>Last name: </label>
+                <br/>
+                <label>Username: </label>
+                <br/>
+            </div>
+            <div class= "card">
+                <%= image_tag('social-media.jpg', size:'75x75', class:'card_image') %>
+                <label>First name: </label>
+                
+                <br/>
+                <label>Last name: </label>
+                <br/>
+                <label>Username: </label>
+                <br/>
+            </div>
+            <div class= "card">
+                <%= image_tag('social-media.jpg', size:'75x75', class:'card_image') %>
+                <label>First name: </label>
+                
+                <br/>
+                <label>Last name: </label>
+                <br/>
+                <label>Username: </label>
+                <br/>
+            </div>
     <% end %>
-    
-</class>
+</div>
 
-<class id= "login_register_wrapper">
-
-    <%= link_to('Login', users_path) %>
-    <br/>
-    <%= link_to('Register', users_register_path) %>
-    
-</class>
+<div class="login_register_wrapper">
+    <table style="position:relative; width:50%; left: 25%">
+        <tr>
+            <td>
+                <%= button_to 'Login', users_path, method: 'get'%>
+            </td>
+            <td>
+                <%= button_to 'Register', users_register_path, method: 'get'%>
+            </td>
+        </tr>
+    </table>
+</div>
 

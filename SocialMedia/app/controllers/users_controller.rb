@@ -8,7 +8,8 @@ class UsersController < ApplicationController
     end
     
     def create
-        @new_user = User.new(registration_params)
+        
+        @new_user = User.create(registration_params)
         if @new_user.save
             redirect_to users_path, :flash => { :success => 'registration complete!' }
         else
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
     
     private
     def registration_params
-        params.require(:user).permit(:first_name, :last_name, :username, :password)
+        params.require(:user).permit(:first_name, :last_name, :username, :password, :sex, :birth_date, :interests, :description, :gravatar)
     end
 
 end

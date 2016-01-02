@@ -22,21 +22,63 @@ body{
     padding: 0;
 }
 
+.logo{
+    position: relative;
+    text-align: center;
+}
+
+.logo img{
+    width: 30%;
+}
+
+.footer{
+    position: fixed;
+    background-color: #E8E8E8;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+}
+
+.navbar-default{
+    position: relative;
+    width: 50%;
+    left: 25%;
+}
+
+tr{
+    height: 3em;
+}
+
+input{
+    border-radius: 3em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+td{
+    width: 25%;
+    padding-left: 1em;
+    padding-top: 2em;
+    vertical-align: middle;
+}
+
+
 .container{
     position: absolute;
-    background-color:bisque;
     width: 100%;
     height: 100%;
     align-content: center;
 }
 
 .register_form{
-    position: relative;
-    background-color: aqua;
+    position: absolute;
+    background-color:azure;
     width: 50%;
-    height: 100%;
+    height: auto;
     left: 50%;
     margin-left: -25%;
+    border: 2px solid #000fff;
+    border-radius: 2em;
 }
 
 .bottom_buttons{
@@ -62,19 +104,3 @@ body{
     padding-left: 10px;
 }
 
-tr{
-    height: 3em;
-}
-
-input{
-    border-radius: 3em;
-    padding-left: 1em;
-    padding-right: 1em;
-}
-
-td{
-    width: 25%;
-    padding-left: 1em;
-    padding-top: 2em;
-    vertical-align: middle;
-}
