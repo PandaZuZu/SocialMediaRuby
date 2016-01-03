@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-        
+    
+    before_filter :save_login_state, :only => [:create, :register]
+    
     def register
         @new_user = User.new
         @interests = Interest.all.order(:name)

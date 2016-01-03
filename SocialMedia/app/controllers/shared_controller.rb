@@ -1,4 +1,5 @@
 class SharedController < ApplicationController
-  def navigationbar
-  end
+      
+    def navigationbar
+    end
 end
