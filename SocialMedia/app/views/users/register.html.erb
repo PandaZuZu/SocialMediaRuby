@@ -39,7 +39,16 @@
                         <%= f.label :password, value: 'Password*' %>
                     </td>
                     <td>
-                        <%= f.text_field :password, value: @password_field, type: 'password' %>  
+                        <%= f.password_field :password %>  
+                    </td>
+                </tr>
+                <!--------------- password confirmation --------------->
+                <tr>
+                    <td>
+                        <%= f.label :password_confirmation, value: 'Password confirmation*' %>
+                    </td>
+                    <td>
+                        <%= f.password_field :password_confirmation %>  
                     </td>
                 </tr>
                 <!--------------- sex --------------->
@@ -69,10 +78,12 @@
                         <%= f.label :interest, value: 'Interested In' %>
                     </td>
                     <td>
-                        <%= f.label :interest, value: 'Women' %>
-                        <%= f.check_box :interests, value: "Women" %> 
-                        <%= f.label :interest, value: 'Men' %>
-                        <%= f.check_box :interests, value: "Men" %>    
+                        <% @interests.each do |i| %>
+                        <%= check_box_tag 'interest_ids[]', i.id %>
+                            <%= i.name %>
+                            <br/>
+                        <% end %>
+        
                     </td>
                 </tr>
             </table>        
@@ -152,7 +163,8 @@
             <% end %>
 
             <br/>
-            <%= f.submit :'Register your passcard' %>
+            <%= f.submit :'Register your passcard' %><br/>
+            <%= link_to 'Already have account? Login here.', sessions_login_path %>
 
         </div>         
         <label style="padding-left:5px; padding-top:10px; color:red; font-size:10px">* field must not be empty</label>

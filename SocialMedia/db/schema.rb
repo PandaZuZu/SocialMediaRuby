@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151231151905) do
+ActiveRecord::Schema.define(version: 20160103122834) do
 
-  create_table "users", force: :cascade do |t|
+  create_table "Users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "username"
-    t.string   "password"
+    t.string   "encrypted_password"
     t.integer  "sex"
     t.date     "birth_date"
     t.string   "interests"
@@ -25,8 +25,18 @@ ActiveRecord::Schema.define(version: 20151231151905) do
     t.integer  "gravatar"
     t.string   "following"
     t.string   "followed_by"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "salt"
+  end
+
+  create_table "interests", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "interests_users", id: false, force: :cascade do |t|
+    t.integer "user_id",     null: false
+    t.integer "interest_id", null: false
   end
 
 end

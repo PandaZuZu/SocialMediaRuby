@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
+
+    get 'sessions/login'
+    post 'sessions/login_attempt'
+    get 'sessions/home'
+    get 'sessions/profile'
+    get 'sessions/setting'
+    
+
     get 'shared/navigationbar'
+    
     get 'home/index'
     
-    get 'users/index', :path => 'profile', as: 'users'
-    get 'users/register', to: 'users#register'
+    get 'users/register', to: 'users#register'    
     post 'users/register', to: 'users#create'
     
     root 'home#index'

@@ -1,0 +1,24 @@
+<header class="logo">
+    <%= image_tag('social-media.jpg') %>
+</header>
+
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<%= form_tag action: 'login_attempt' do %>
+    <div class="login_form">
+            <%= image_tag('http://hospitalfranciscovilar.com.br/wp-content/uploads/2013/11/gravatar-60-grey.jpg', size:'100x100', class:'card_image') %>
+            <label>Username: </label>
+            <%= text_field_tag :username %>
+            <br/>
+            <label>Password: </label>
+            <%= password_field_tag :login_password %>
+            <br/>
+    </div>
+
+    <div style='position:relative; text-align:center; margin-top:10px'>
+        <%= submit_tag 'Log In' %><br/>
+        <%= link_to 'No account? Register here.', users_register_path %>
+    </div>
+<% end %>

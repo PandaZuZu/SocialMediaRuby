@@ -1,3 +1,4 @@
+
 <ul>
     <% if @current_user != nil %>
         <%= @current_user.first_name %>
@@ -8,6 +9,12 @@
             empty
         <% end %>
     <br/>
+    
+        <% if @current_user.interests.any? %>
+            <% @current_user.interests.each do |i| %>
+                <%= i.id %>
+            <% end %>
+        <% end %>
     
     <% else %>
         nNULL

@@ -1,19 +1,27 @@
 class UsersController < ApplicationController
-    def index
-        @current_user = User.find_by first_name:'test1'
-    end
-    
-    def register
-        @new_user = User.new()
-    end
-    
-    def create
         
-        @new_user = User.create(registration_params)
+    def register
+        @new_user = User.new
+        @interests = Interest.all.order(:name)
+    end
+    
+    def create        
+        @interests = Interest.all.order(:name)
+                
+        @new_user = User.new(registration_params)
         if @new_user.save
-            redirect_to users_path, :flash => { :success => 'registration complete!' }
+            
+            #interests management
+            if params[:interest_ids] != nil && params[:interest_ids].any?
+                @interests_ids = params[:interest_ids]
+                for i in @interests_ids
+                    @current_interest = @interests.find_by id: i
+                    @new_user.interests << @current_interest
+                end
+            end
+            
+            redirect_to home_index_path, :flash => { :success => 'registration complete!' }
         else
-            @password_field = String.new
             @username_field = String.new
             render users_register_path
         end
@@ -21,7 +29,7 @@ class UsersController < ApplicationController
     
     private
     def registration_params
-        params.require(:user).permit(:first_name, :last_name, :username, :password, :sex, :birth_date, :interests, :description, :gravatar)
+        params.require(:user).permit(:first_name, :last_name, :username, :password, :sex, :birth_date, :description, :gravatar)
     end
 
 end
