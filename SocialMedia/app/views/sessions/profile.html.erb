@@ -1,2 +1,70 @@
-<h1>Sessions#profile</h1>
-<p>Find me in app/views/sessions/profile.html.erb</p>
+<div class="middle_wrapper">
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+    <div class='left_container'>
+        <%= image_tag(@current_gravatar, size:'300x300')%>
+    </div>
+    <div class='right_container'>
+        <%= label_tag 'First name: ' %>
+        <%= @viewing_profile.first_name %>
+        <br/>
+        <%= label_tag 'Last name: '%>
+        <%= @viewing_profile.last_name %>
+        <br/>
+        <%= label_tag 'Username: ' %>
+        <%= @viewing_profile.username %>
+        <br/>
+        <%= label_tag 'Description: ' %>
+        <%= @viewing_profile.description %>
+    </div>
+    <div class='bottom_container'>
+        <% if @viewing_profile.interests.any? %>
+            <%= label_tag 'Interests:' %>
+        
+            <% @viewing_profile.interests.each do |i| %>
+                <!---------- computer ---------->
+                <% if i.id == 1 %>
+                    <%= image_tag('interest1.png', size:'100x100') %>
+                <% end %>
+                <!---------- Art ---------->
+                <% if i.id == 2 %>
+                    <%= image_tag('interest2.png', size:'100x100') %>
+                <% end %>
+                <!----------- Games ----------->
+                <% if i.id == 3 %>
+                    <%= image_tag('interest3.png', size:'100x100') %>
+                <% end %>
+                <!----------- Books --------->
+                <% if i.id == 4 %>
+                    <%= image_tag('interest4.png', size:'100x100') %>
+                <% end %>
+            <% end %>
+        <% end %>
+        <br/>
+        <br/>
+        <% if @current_user.users.include?(@viewing_profile) %>
+        <div style='float:right'>
+            <%= link_to(:controller => 'sessions', :action => 'unfollow', :viewing_profile => @viewing_profile.username, :current_user => @current_user.username) do %>
+                <div style='text-align:center'>
+                    <%= image_tag('unfollow.png', size:'50x50') %>
+                    <br/>
+                    Unfollow
+                </div>
+            <% end %>
+        </div>    
+        <% else %>
+        <div style='float:right'>
+            <%= link_to(:controller => 'sessions', :action => 'follow', :viewing_profile => @viewing_profile.username, :current_user => @current_user.username) do %>
+                <div style='text-align:center'>
+                    <%= image_tag('following.png', size:'50x50') %>
+                    <br/>
+                    Follow
+                </div>
+            <% end %>
+        </div>
+        <% end %>
+        
+    </div>
+    
+</div>

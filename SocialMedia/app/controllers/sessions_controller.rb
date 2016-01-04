@@ -25,34 +25,54 @@ class SessionsController < ApplicationController
 
 
     def home
-        check_gravatar
-        
-        @random_friends = @current_user.interests
-        
+        @featured_users = User.all.sample(5)
+        @gravatars = ['gravatar0.png', 'gravatar1.png', 'gravatar2.png' , 'gravatar3.png', 'gravatar4.png', 'gravatar5.png', 'gravatar6.png']
+        check_gravatar(@current_user)
     end
     
-    def check_gravatar
-        if @current_user.gravatar == 1
-            @current_gravatar = 'gravatar1.png'
-        elsif @current_user.gravatar == 2
-            @current_gravatar = 'gravatar2.png'
-        elsif @current_user.gravatar == 3
-            @current_gravatar = 'gravatar3.png'
-        elsif @current_user.gravatar == 4
-            @current_gravatar = 'gravatar4.png'
-        elsif @current_user.gravatar == 5
-            @current_gravatar = 'gravatar5.png'
-        elsif @current_user.gravatar == 6
-            @current_gravatar = 'gravatar6.png'
-        else
-            @current_gravatar = 'gravatar0.png'
-        end 
-    end
-
     def profile
+        @viewing_profile = User.find_by username: params[:viewing_profile]
+        
+        @gravatars = ['gravatar0.png', 'gravatar1.png', 'gravatar2.png' , 'gravatar3.png', 'gravatar4.png', 'gravatar5.png', 'gravatar6.png']
+        @following_status = 'Unfollow'
+
+        if @viewing_profile != nil
+            check_gravatar(@viewing_profile)
+        end
     end
 
+    def follow
+        @current_user = User.find_by username: params[:current_user]
+        @viewing_profile = User.find_by username: params[:viewing_profile]
+        
+       if !@current_user.users.include?(@viewing_profile)
+           @current_user.users << @viewing_profile
+           flash[:notice] = @current_user.users.all
+        end
+        
+        redirect_to :controller => 'sessions', :action => 'profile', :viewing_profile => @viewing_profile.username
+    end
+    
+    def unfollow
+        @current_user = User.find_by username: params[:current_user]
+        @viewing_profile = User.find_by username: params[:viewing_profile]
+        
+        if @current_user.users.include?(@viewwing_profile)
+            @current_user.users.delete(@viewing_profile)
+            flash[:notice] = 'unfollow'
+        end
+        
+        redirect_to :controller => 'sessions', :action => 'profile', :viewing_profile => @viewing_profile.username
+    end
+    
     def setting
     end
 
+    def check_gravatar(user_profile = User.new)
+        if user_profile.gravatar == nil
+            @current_gravatar = @gravatars[0]
+        else
+            @current_gravatar = @gravatars[user_profile.gravatar]
+        end
+    end
 end

@@ -38,7 +38,50 @@
                 <% end %>
             <% end %>
         <% end %>
-        </br>
+        <br/>
+        <br/>
+        <%= label_tag 'Following:' %>
+        <% if @current_user.users.any? %>
+            <% @current_user.users.each do |i| %>
+                <%= @current_user.users.count %>
+                <br/> 
+                <%= i.username %>
+            <% end %>
+        <% end %>
     </div>
-    
+</div>
+
+<div class="featured">
+Featured Users
+    <% if @featured_users.any? %>
+        <% @featured_users.each do |feat| %>
+            <% if @current_user == feat %>
+                <% @action = 'home' %>
+            <% else %>
+                <% @action = 'profile' %>
+            <% end %>
+        <%= link_to(:controller => 'sessions', :action => @action, :viewing_profile => feat.username) do %>
+                <div class="featured_passcard">
+                    <div class="left_container">
+                        <% if feat.gravatar == nil %>
+                            <%= image_tag(@gravatars[0], size:'70x70')%>
+                        <% else %>
+                            <%= image_tag(@gravatars[feat.gravatar], size:'70x70')%>
+                        <% end %>
+                    </div>
+                    <div class="right_container" style="font-size:12px; text-align:left">
+                        <%= label_tag 'First name: ' %>
+                        <%= feat.first_name %>
+                        <br/>
+                        <%= label_tag 'Last name: '%>
+                        <%= feat.last_name %>
+                        <br/>
+                        <%= label_tag 'Username: ' %>
+                        <%= feat.username %>
+                        <br/>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
 </div>

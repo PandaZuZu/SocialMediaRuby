@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get 'sessions/logout'
     get 'sessions/home'
     get 'sessions/profile'
+    get 'sessions/follow'
+    get 'sessions/unfollow'
     get 'sessions/setting'
 
     get 'shared/navigationbar'

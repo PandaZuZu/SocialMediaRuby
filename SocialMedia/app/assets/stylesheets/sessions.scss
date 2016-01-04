@@ -31,6 +31,7 @@
     height: auto;
     left: 50%;
     margin-left: -25%;
+    margin-top: 50px;
     padding: 1em 2em 1em 2em;
     border: 2px solid #000fff;
     border-radius: 2em;
@@ -38,6 +39,7 @@
 
 .middle_wrapper img{
     margin-right: 25px;
+    margin-top: 20px;
 }
 
 .left_container{
@@ -66,4 +68,23 @@
 .bottom_container img{
     margin-left: 40px;
     margin-right: 25px;
+}
+
+.featured{
+    position: fixed;
+    width: 20%;
+    right: 2%;
+    font-size: 30px;
+    text-align: center;
+}
+
+.featured_passcard{
+    background-color:azure;
+    border: 2px solid #000fff;
+    border-radius: 2em;
+    width: 100%;
+    height: auto;
+    padding: 10px 0 10px 0;
+    margin: 10px 0 10px 0;
+    float: left;
 }
