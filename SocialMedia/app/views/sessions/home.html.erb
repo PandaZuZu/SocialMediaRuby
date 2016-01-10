@@ -1,3 +1,6 @@
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>
 <div class="middle_wrapper">
     <div class='left_container'>
         <%= image_tag(@current_gravatar, size:'300x300')%>
@@ -41,13 +44,33 @@
         <br/>
         <br/>
         <%= label_tag 'Following:' %>
-        <% if @current_user.users.any? %>
-            <% @current_user.users.each do |i| %>
-                <%= @current_user.users.count %>
+        <% if @current_user.friends.any? %>
+        <%= @current_user.friends.count %>
+        <% @current_user.friends.each do |i| %>
                 <br/> 
+            <%= link_to(:controller => 'sessions', :action => 'profile', :viewing_profile => i.username) do %>
                 <%= i.username %>
             <% end %>
         <% end %>
+        <% end %>
+        <br/>
+        <br/>
+        <%= form_tag action: 'search' do %>
+        <%= text_field_tag :query%>
+        <%= submit_tag 'search'%>
+        <% end %><br/>
+
+        <% if @query_results != nil %>
+            <% @query_results.each do |q| %>
+                <% if @current_user.username != q %>
+                    <%= link_to(:controller => 'sessions', :action => 'profile' , :viewing_profile => q) do %>
+                        <%= q %>
+                        <br/>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+
     </div>
 </div>
 

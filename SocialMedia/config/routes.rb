@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'sessions/follow'
     get 'sessions/unfollow'
     get 'sessions/setting'
+    post 'sessions/search'
 
     get 'shared/navigationbar'
     

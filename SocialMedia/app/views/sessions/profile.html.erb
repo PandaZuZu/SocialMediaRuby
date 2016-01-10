@@ -1,7 +1,4 @@
 <div class="middle_wrapper">
-<% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-<% end %>
     <div class='left_container'>
         <%= image_tag(@current_gravatar, size:'300x300')%>
     </div>
@@ -43,7 +40,7 @@
         <% end %>
         <br/>
         <br/>
-        <% if @current_user.users.include?(@viewing_profile) %>
+        <% if @current_user.friends.include?(@viewing_profile) %>
         <div style='float:right'>
             <%= link_to(:controller => 'sessions', :action => 'unfollow', :viewing_profile => @viewing_profile.username, :current_user => @current_user.username) do %>
                 <div style='text-align:center'>

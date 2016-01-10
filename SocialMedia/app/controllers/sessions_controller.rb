@@ -25,9 +25,44 @@ class SessionsController < ApplicationController
 
 
     def home
+        @query_results = params[:query_results]
         @featured_users = User.all.sample(5)
         @gravatars = ['gravatar0.png', 'gravatar1.png', 'gravatar2.png' , 'gravatar3.png', 'gravatar4.png', 'gravatar5.png', 'gravatar6.png']
         check_gravatar(@current_user)
+    end
+    
+    def search
+        keyword = params[:query]
+        first_name_results = User.where('first_name like ?', '%' + keyword + '%')
+        last_name_results = User.where('last_name like ?', '%' + keyword + '%')
+        username_results = User.where('username like ?', '%' + keyword + '%')
+        
+        
+        query_results = ""
+        
+        first_name_results.each do|q|
+            if !query_results.include?(q.username) && q.username != params[:current_user]
+                query_results << q.username + ","
+            end
+        end
+        
+        last_name_results.each do |q|
+            if !query_results.include?(q.username) && q.username != params[:current_user]
+                query_results << q.username + ","
+            end
+        end
+        
+        username_results.each do |q|
+            if !query_results.include?(q.username) && q.username != params[:current_user]
+                query_results << q.username + ","
+            end
+        end
+        
+        flash[:notice] = params[:current_user]
+        
+        results = query_results.split(/,/)
+        
+        redirect_to action: 'home', :query_results => results
     end
     
     def profile
@@ -45,9 +80,8 @@ class SessionsController < ApplicationController
         @current_user = User.find_by username: params[:current_user]
         @viewing_profile = User.find_by username: params[:viewing_profile]
         
-       if !@current_user.users.include?(@viewing_profile)
-           @current_user.users << @viewing_profile
-           flash[:notice] = @current_user.users.all
+        if !@current_user.friends.include?(@viewing_profile)
+            @current_user.friends << @viewing_profile
         end
         
         redirect_to :controller => 'sessions', :action => 'profile', :viewing_profile => @viewing_profile.username
@@ -57,11 +91,9 @@ class SessionsController < ApplicationController
         @current_user = User.find_by username: params[:current_user]
         @viewing_profile = User.find_by username: params[:viewing_profile]
         
-        if @current_user.users.include?(@viewwing_profile)
-            @current_user.users.delete(@viewing_profile)
-            flash[:notice] = 'unfollow'
-        end
+        @current_user.friends.delete(@viewing_profile)
         
+
         redirect_to :controller => 'sessions', :action => 'profile', :viewing_profile => @viewing_profile.username
     end
     
